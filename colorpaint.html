@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  margin: 0;
+}
+
+rect {
+  stroke: #fff;
+  stroke-width: .1px;
+}
+
+</style>
+<body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+
+var w = 960,
+    h = 500,
+    z = 15,
+    x = w / z,
+    y = h / z;
+
+var svg = d3.select("body").append("svg")
+    .attr("width", w)
+    .attr("height", h);
+
+svg.selectAll("rect")
+    .data(d3.range(x * y * 2))
+  .enter().append("rect")
+    .attr("transform", translate)
+    .attr("width", z)
+    .attr("height", z)
+    .style("fill", function(d) { return d3.hsl(d % x / x * 360, 1, Math.floor(d / x) / y); })
+    .on("mouseover", mouseover);
+
+// svg.selectAll("rect")
+//     .data(d3.range(x * y))
+//   .enter().append("rect")
+//     .attr("transform", translate2)
+//     .attr("width", z)
+//     .attr("height", z)
+//     .style("fill-opacity", 0)
+//     .style("fill", function(d) { return d3.hsl(d % x / x * 360, 1, Math.floor(d / x) / y * 0.5); })
+//     .on("mouseover", mouseover2);
+
+function width(d) {
+  return d * z;
+}
+
+function translate(d) {
+  return "translate(" + (d % x) * z + "," + Math.floor(d / x) * z + ")";
+}
+
+function translate2(d) {
+  return "translate(" + (((d % x) * z) + (z/2)) + "," + ((Math.floor(d / x) * z) - z/2) + ") rotate(45) scale(1.4, 1.4)";
+}
+
+function rotate(d) {
+  return "rotate(5)";
+}
+
+function mouseover(d) {
+  this.parentNode.appendChild(this);
+    var tf = this.attributes.transform.value
+    var newTf = translate2(d)
+    var newFill = d3.hsl(200, 0.25, Math.random()*0.75 + 0.25)
+  d3.select(this)
+      .style("pointer-events", "none")
+    .transition()
+      .duration(250)
+      .attr("transform", newTf)
+      .style("fill", newFill)
+
+}
+
+function mouseover2(d) {
+  this.parentNode.appendChild(this);
+    // var tf = this.attributes.transform.value
+    // var newTf = translate2(d)
+    var newFill = d3.hsl(250, 0.5, Math.random()*0.75 + 0.25)
+  d3.select(this)
+    .style("fill-opacity", 1)
+
+
+    //   .style("pointer-events", "none")
+      .style("fill", newFill)
+
+    // .transition()
+    //   .duration(750)
+}
+
+</script>

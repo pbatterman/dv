@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  margin: 0;
+}
+
+rect {
+  stroke: #fff;
+  stroke-width: .1px;
+}
+
+.canvas {
+    border: 1px solid #ccc;
+    width: 960px;
+    margin: 40px;
+}
+
+</style>
+<body>
+    <div class='canvas'></div>
+</body>
+<script src="//d3js.org/d3.v3.min.js"></script>
+<script>
+
+var w = 960,
+    h = 500,
+    z = 10,
+    x = w / z,
+    y = h / z;
+
+var svg = d3.select(".canvas").append("svg")
+    .attr("width", w)
+    .attr("height", h);
+
+svg.selectAll("rect")
+    .data(d3.range(x * y))
+  .enter().append("rect")
+    .attr("transform", translate)
+    .attr("width", z)
+    .attr("height", z)
+    .style("fill", d3.hsl(360, 1, 1))
+    .on("mouseover", mouseover);
+
+function width(d) {
+  return d * z;
+}
+
+function translate(d) {
+  return "translate(" + (d % x) * z + "," + Math.floor(d / x) * z + ")";
+}
+
+function mouseover(d) {
+  this.parentNode.appendChild(this);
+    const color = this.style.fill
+    const value = Number(color.substring(4, 7))
+    const newValue = Math.max(value - 20, 0)
+
+    var newFill = d3.rgb(newValue, newValue, newValue)
+    d3.select(this)
+    .transition()
+      .duration(150)
+      .style("fill", newFill)
+
+}
+</script>
