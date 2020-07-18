@@ -148,7 +148,7 @@
         d3.active(this)
             .attr("ry", 30)
             .attr("rx", 80)
-            .attr("cy", 80)
+            .attr("y", 80)
             .styleTween("stroke", function() { return d3.interpolate("cyan", "navy"); })
           .transition()
             .attr("ry", 30)
@@ -158,6 +158,130 @@
           .transition()
             .on("start", repeat);
       })
+
+/*
+      // RECT START HERE
+
+      circles.append("rect")
+      .attr("y", 0)
+      .attr("x", function(d) {return d * 5})
+      .attr("height", 50)
+      .attr("width", function(d, i) {return 20})
+      // .attr("fill", "rgba(255, 0, 0, 0.05")
+      .attr("fill", "transparent")
+      .attr("stroke", "transparent")
+      .attr("stroke-width", 1)
+      .transition()
+      .delay(function(d,i) {
+        return i * 40
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+            .attr("height", 50)
+            .attr("width", 50)
+            .attr("y", 0)
+            // .attr("stroke-width", 1)
+            .styleTween("stroke", function() { return d3.interpolate("yellow", "red"); })
+            // .styleTween("fill", function() { return d3.interpolate("white", "black"); })
+          .transition()
+            .attr("height", 20)
+            .attr("width", 80)
+            .attr("y", 100)
+            .styleTween("stroke", function() { return d3.interpolate("red", "yellow"); })
+            // .attr("stroke-width", 4)
+            // .styleTween("fill", function() { return d3.interpolate("black", "white"); })
+          .transition()
+            .on("start", repeat);
+      })
+
+      circles.append("rect")
+      .attr("y", 0)
+      .attr("x", function(d) {return d * 4.5})
+      .attr("height", 50)
+      .attr("width", function(d, i) {return 20})
+      .attr("fill", "transparent")
+      .attr("stroke", "transparent")
+      .attr("stroke-width", 1)
+      .transition()
+      .delay(function(d,i) {
+        return i * 30
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+            .attr("height", 30)
+            .attr("width", 50)
+            .attr("y", 0)
+            .styleTween("stroke", function() { return d3.interpolate("green", "orange"); })
+          .transition()
+            .attr("height", 40)
+            .attr("width", 80)
+            .attr("y", 100)
+            .styleTween("stroke", function() { return d3.interpolate("orange", "green"); })
+          .transition()
+            .on("start", repeat);
+      })
+
+      circles.append("rect")
+      .attr("y", 100)
+      .attr("x", function(d) {return d * 4})
+      .attr("height", 50)
+      .attr("width", function(d, i) {return 20})
+      .attr("fill", "transparent")
+      .attr("stroke", "transparent")
+      // .attr("stroke-width", 2)
+      .transition()
+      .delay(function(d,i) {
+        return i * 20
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+            .attr("height", 50)
+            .attr("width", 50)
+            .attr("y", 100)
+            // .attr("stroke-width", 1)
+            .styleTween("stroke", function() { return d3.interpolate("blue", "magenta"); })
+            // .styleTween("fill", function() { return d3.interpolate("white", "black"); })
+          .transition()
+            .attr("height", 30)
+            .attr("width", 80)
+            .attr("y", 0)
+            .styleTween("stroke", function() { return d3.interpolate("magenta", "blue"); })
+            // .styleTween("fill", function() { return d3.interpolate("black", "white"); })
+          .transition()
+            .on("start", repeat);
+      })
+
+      circles.append("rect")
+      .attr("y", 70)
+      .attr("x", function(d) {return d * 5.5})
+      .attr("height", 50)
+      .attr("width", function(d, i) {return 20})
+      .attr("fill", "transparent")
+      .attr("stroke", "transparent")
+      .attr("stroke-width", 1)
+      .transition()
+      .delay(function(d,i) {
+        return i * 25
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+            .attr("height", 30)
+            .attr("width", 80)
+            .attr("y", 80)
+            .styleTween("stroke", function() { return d3.interpolate("cyan", "navy"); })
+          .transition()
+            .attr("height", 30)
+            .attr("width", 50)
+            .attr("y", 10)
+            .styleTween("stroke", function() { return d3.interpolate("navy", "cyan"); })
+          .transition()
+            .on("start", repeat);
+      })
+*/
     </script>
   </body>
 </html>
