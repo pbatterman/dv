@@ -1,0 +1,235 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Circle Tunnel</title>
+    <style>
+      body {
+        background-color: rgb(76, 0, 95);
+      }
+      .container {
+        background-color: rgb(76, 0, 95);
+        margin: 50px auto;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chart"></div>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script>
+    var width = 600;
+    var height = 600;
+    var padding = {top: 30, right: 30, bottom: 30, left: 30};
+
+    var svg = d3.select("#chart").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("class", "container")
+      .append("g")
+        .attr("transform", "translate(20, "+ height / 2+ ")");
+
+
+    var data = d3.range(600).map(function(d) {
+      return d;
+    });
+
+    var circles = svg.selectAll("ellipse")
+      .data(data)
+      .enter()
+      .append('g')
+
+    const amp = 160
+    const yDeltas = Array.from({length: 8}, () => Math.random() * amp - (amp / 2));
+    const colors = ['#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff', '#fff',]
+    const colors1 = ['#2447FF', '#2175E8', '#1FA3D1', '#1CD1BA', '#1AFFA3']
+    const colors2 = ['#FFA024', '#F4B721', '#E9CF1F', '#DEE71C', '#D3FF1A']
+    const colors3 = ['#E50008', '#EB3E08', '#F27C09', '#F8BA09', '#FFF80A']
+
+    const yDeltas2 = Array.from({length: 8}, () => Math.random() * amp - (amp / 2));
+    
+    console.log(yDeltas)
+
+    circles.append("ellipse")
+      .attr("cy", 0)
+      .attr("cx", function(d) {return d * 2 - 6})
+      .attr("ry", 3)
+      .attr("rx", function(d, i) {return 3})
+      .attr("fill", "magenta")
+      .attr("stroke", "magenta")
+      .attr("stroke-width", 1.5)
+      .transition()
+      .delay(function(d,i) {
+        return i * 20
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+          .attr("cy", 0)
+            // .styleTween("stroke", function() { return d3.interpolate("yellow", "red"); })
+            .transition()
+            .attr("cy", yDeltas[0])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[0], colors[1]); })
+          .transition()
+            .attr("cy", yDeltas[1])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[1], colors[2]); })
+          .transition()
+            .attr("cy", yDeltas[2])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[2], colors[3]); })
+          .transition()
+            .attr("cy", yDeltas[3])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[3], colors[4]); })
+          .transition()
+            .attr("cy", yDeltas[4])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[4], colors[3]); })
+          .transition()
+            .attr("cy", yDeltas[5])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[3], colors[2]); })
+          .transition()
+            .attr("cy", yDeltas[6])
+            // .styleTween("stroke", function() { return d3.interpolate(colors[2], colors[1]); })
+          .transition()
+            .attr("cy", 0)
+            // .styleTween("stroke", function() { return d3.interpolate(colors[0], colors[0]); })
+          .transition()
+            .on("start", repeat);
+      })
+
+      circles.append("ellipse")
+      .attr("cy", 0)
+      .attr("cx", function(d) {return d})
+      .attr("ry", 25)
+      .attr("rx", function(d, i) {return 4})
+      .attr("fill", "rgba(255, 0, 0, 0.25")
+      .attr("stroke", "rgba(255, 0, 0, 0.25")
+      // .attr("stroke-width", 2)
+      .transition()
+      .delay(function(d,i) {
+        return i * 30
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+        .attr("cy", 0)
+            // .styleTween("stroke", function() { return d3.interpolate("yellow", "red"); })
+            .transition()
+            .attr("cy", yDeltas[0])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[0], colors3[1]); })
+          .transition()
+            .attr("cy", yDeltas[1])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[1], colors3[2]); })
+          .transition()
+            .attr("cy", yDeltas[2])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[2], colors3[3]); })
+          .transition()
+            .attr("cy", yDeltas[3])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[3], colors3[4]); })
+          .transition()
+            .attr("cy", yDeltas[4])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[4], colors3[3]); })
+          .transition()
+            .attr("cy", yDeltas[5])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[3], colors3[2]); })
+          .transition()
+            .attr("cy", yDeltas[6])
+            .styleTween("stroke", function() { return d3.interpolate(colors3[2], colors3[1]); })
+          .transition()
+            .attr("cy", 0)
+            .styleTween("stroke", function() { return d3.interpolate(colors3[1], colors3[0]); })
+          .transition()
+            .on("start", repeat);
+      })
+
+
+      circles.append("ellipse")
+      .attr("cy", 0)
+      .attr("cx", function(d) {return d})
+      .attr("ry", 18)
+      .attr("rx", function(d, i) {return 2})
+      .attr("fill", "rgba(233, 207, 31, 0.5)")
+      .attr("stroke", "rgba(255, 150, 0, 0.5)")
+      // .attr("stroke-width", 2)
+      .transition()
+      .delay(function(d,i) {
+        return i * 50
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+          .attr("cy", 0)
+            // .styleTween("stroke", function() { return d3.interpolate("yellow", "red"); })
+            .transition()
+            .attr("cy", yDeltas[0])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[0], colors2[1]); })
+          .transition()
+            .attr("cy", yDeltas[1])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[1], colors2[2]); })
+          .transition()
+            .attr("cy", yDeltas[2])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[2], colors2[3]); })
+          .transition()
+            .attr("cy", yDeltas[3])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[3], colors2[4]); })
+          .transition()
+            .attr("cy", yDeltas[4])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[4], colors2[3]); })
+          .transition()
+            .attr("cy", yDeltas[5])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[3], colors2[2]); })
+          .transition()
+            .attr("cy", yDeltas[6])
+            .styleTween("stroke", function() { return d3.interpolate(colors2[2], colors2[1]); })
+          .transition()
+            .attr("cy",0)
+            .styleTween("stroke", function() { return d3.interpolate(colors2[1], colors2[0]); })
+          .transition()
+            .on("start", repeat);
+      })
+
+      circles.append("ellipse")
+      .attr("cy", 0)
+      .attr("cx", function(d) {return d})
+      .attr("ry", 14)
+      .attr("rx", function(d, i) {return 1})
+      .attr("fill", "rgba(0, 255, 255, 0.25")
+      .attr("stroke", "rgba(0, 255, 255, 0.25")
+      // .attr("stroke-width", 2)
+      .transition()
+      .delay(function(d,i) {
+        return i * 60
+      })
+      .duration(1000)
+      .on("start", function repeat() {
+        d3.active(this)
+        .attr("cy", 0)
+            // .styleTween("stroke", function() { return d3.interpolate("yellow", "red"); })
+            .transition()
+            .attr("cy", yDeltas[0])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[0], colors1[1]); })
+          .transition()
+            .attr("cy", yDeltas[1])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[1], colors1[2]); })
+          .transition()
+            .attr("cy", yDeltas[2])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[2], colors1[3]); })
+          .transition()
+            .attr("cy", yDeltas[3])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[3], colors1[4]); })
+          .transition()
+            .attr("cy", yDeltas[4])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[4], colors1[3]); })
+          .transition()
+            .attr("cy", yDeltas[5])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[3], colors1[2]); })
+          .transition()
+            .attr("cy", yDeltas[6])
+            .styleTween("stroke", function() { return d3.interpolate(colors1[2], colors1[1]); })
+          .transition()
+            .attr("cy", 0)
+            .styleTween("stroke", function() { return d3.interpolate(colors1[1], colors1[0]); })
+          .transition()
+            .on("start", repeat);
+      })
+    </script>
+  </body>
+</html>
